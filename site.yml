@@ -1,0 +1,23 @@
+---
+# This playbook sets up whole stack.
+ 
+- name: Configurations to "remote" host
+  hosts: localhost, droplet1
+  remote_user: ubuntu # Remote user
+  become: yes
+  roles:
+    - setup
+ 
+- name: Copying "docker" application folder on remote server
+  hosts: localhost, droplet1
+  remote_user: ubuntu # Remote user
+  become: yes
+  roles:
+    - app
+
+- name: Installing nginx
+  hosts: localhost, droplet1
+  remote_user: ubuntu # Remote user
+  become: yes
+  roles:
+    - geerlingguy.nginx
